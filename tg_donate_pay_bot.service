@@ -1,0 +1,16 @@
+[Unit]
+Description="Бот для отправки донатов из donatepay.ru в telegram"
+Requires=mongodb.service
+After=network.target mongodb.service
+
+[Service]
+User=release
+Group=release
+EnvironmentFile=/etc/conf.d/tg_donate_pay_bot
+WorkingDirectory=/srv/TGDonatePayBot/src
+ExecStart=/srv/TGDonatePayBot/bin/python main.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
